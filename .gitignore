@@ -1,0 +1,14 @@
+# Build
+**/bin/
+**/obj/
+
+# Visual Studio / VS Code
+**/.vs/
+**/.vscode/
+
+# User-specific
+*.user
+*.suo
+
+# macOS
+.DS_Store
