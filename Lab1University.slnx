@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="University.ConsoleApp/University.ConsoleApp.csproj" />
+  <Project Path="University.Models/University.Models.csproj" />
+  <Project Path="University.Presentation/University.Presentation.csproj" />
+  <Project Path="University.Services/University.Services.csproj" />
+</Solution>

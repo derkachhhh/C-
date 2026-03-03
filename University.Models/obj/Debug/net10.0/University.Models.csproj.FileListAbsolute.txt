@@ -1,0 +1,11 @@
+/Users/apple/Lab1University/University.Models/bin/Debug/net10.0/University.Models.deps.json
+/Users/apple/Lab1University/University.Models/bin/Debug/net10.0/University.Models.dll
+/Users/apple/Lab1University/University.Models/bin/Debug/net10.0/University.Models.pdb
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/University.Models.GeneratedMSBuildEditorConfig.editorconfig
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/University.Models.AssemblyInfoInputs.cache
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/University.Models.AssemblyInfo.cs
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/University.Models.csproj.CoreCompileInputs.cache
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/University.Models.dll
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/refint/University.Models.dll
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/University.Models.pdb
+/Users/apple/Lab1University/University.Models/obj/Debug/net10.0/ref/University.Models.dll
