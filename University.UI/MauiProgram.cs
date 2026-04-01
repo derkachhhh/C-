@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
-using University.Services.Storage;
+using University.Repositories;
+using University.Repositories.Interfaces;
+using University.Services;
+using University.Services.Interfaces;
+using University.UI.ViewModels;
 
 namespace University.UI;
 
@@ -20,9 +24,12 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        builder.Services.AddSingleton<IUniversityRepository, UniversityRepository>();
+        builder.Services.AddSingleton<IUniversityService, UniversityService>();
 
-        builder.Services.AddSingleton<IUniversityStorageService, UniversityStorageService>();
-
+        builder.Services.AddTransient<DepartmentsViewModel>();
+        builder.Services.AddTransient<DepartmentDetailsViewModel>();
+        builder.Services.AddTransient<TeacherDetailsViewModel>();
 
         builder.Services.AddTransient<DepartmentsPage>();
 

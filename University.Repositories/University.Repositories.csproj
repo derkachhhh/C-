@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\University.Models\University.Models.csproj" />
-    <ProjectReference Include="..\University.Repositories\University.Repositories.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

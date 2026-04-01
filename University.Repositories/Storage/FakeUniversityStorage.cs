@@ -1,7 +1,7 @@
 using University.Models.Data;
 using University.Models.Enums;
 
-namespace University.Services.Storage;
+namespace University.Repositories.Storage;
 
 internal static class FakeUniversityStorage
 {
