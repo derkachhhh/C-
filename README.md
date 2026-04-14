@@ -28,7 +28,20 @@
 - Реалізація Service layer — ✓  
 - Використання DTO — ✓  
 - Dependency Injection та IoC — ✓  
-- Навігація через ViewModel — ✓  
+- Навігація через ViewModel — ✓
+
+### Лабораторна робота 4 (20 балів)
+- Реалізовано повнофункціональний застосунок — ✓
+- Реалізовано JSON-сховище з початковими даними — ✓
+- Асинхронна робота з даними (async/await) — ✓
+- CRUD для кафедр — ✓
+- CRUD для викладачів — ✓
+- Пошук, фільтрація та сортування — ✓
+- MVVM архітектура — ✓
+- Repository + Service + DTO — ✓
+- Dependency Injection та IoC — ✓
+- Збереження даних між запусками — ✓
+- ActivityIndicator та IsBusy (UI не блокується) — ✓
 
 ---
 
@@ -133,6 +146,45 @@ UI → ViewModel → Service → Repository → Data
 - `University.Repositories`  
 - `University.Services`  
 - `University.UI`   
+
+## Запуск
+
+```bash
+dotnet build University.UI -f net10.0-android
+dotnet run --project University.UI -f net10.0-android
+```
+
+---
+
+# Лабораторна робота 4
+
+## Тема
+Асинхронна робота з даними, реальне сховище, CRUD, пошук і сортування.
+
+## Мета
+Перетворити застосунок у повнофункціональну систему з постійним збереженням даних та повним управлінням сутностями.
+
+## Реалізовано
+
+Реальне сховище даних (JSON)
+Асинхронний доступ до даних (async/await)
+CRUD для:
+кафедр
+викладачів
+Пошук та фільтрація
+Сортування
+Збереження даних між запусками
+Індикація завантаження (IsBusy, ActivityIndicator)
+Повністю MVVM-архітектура
+
+## Архітектура
+UI → ViewModel → Service → Repository → JSON Storage
+
+## Структура
+
+- `University.Repositories`  — робота з JSON
+- `University.Services`      — бізнес-логіка
+- `University.UI`            — MAUI інтерфейс
 
 ## Запуск
 
