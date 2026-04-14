@@ -4,13 +4,16 @@ namespace University.Models.Data;
 
 public class TeacherData
 {
-    public int Id { get; }
-    public int DepartmentId { get; }
+    public int Id { get; set; }
+    public int DepartmentId { get; set; }
+    public string FullName { get; set; } = string.Empty;
+    public AcademicRank Rank { get; set; }
+    public string Email { get; set; } = string.Empty;
+    public int ExperienceYears { get; set; }
 
-    public string FullName { get; private set; }
-    public AcademicRank Rank { get; private set; }
-    public string Email { get; private set; }
-    public int ExperienceYears { get; private set; }
+    public TeacherData()
+    {
+    }
 
     public TeacherData(
         int id,

@@ -5,9 +5,9 @@
     x:Class="University.UI.DepartmentDetailsPage"
     Title="Деталі кафедри">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="12">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" Padding="16" RowSpacing="12">
 
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
             <Label Text="{Binding Name}"
                    FontSize="24"
                    FontAttributes="Bold" />
@@ -17,41 +17,68 @@
 
             <Label Text="{Binding Building}"
                    FontSize="16" />
-
-            <Label Text="Викладачі"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   Margin="0,12,0,0" />
-
-            <CollectionView ItemsSource="{Binding Teachers}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="12"
-                               Margin="0,6"
-                               CornerRadius="12">
-
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenTeacherCommand}"
-                                    CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
-
-                            <VerticalStackLayout Spacing="4">
-                                <Label Text="{Binding FullName}"
-                                       FontSize="18"
-                                       FontAttributes="Bold" />
-
-                                <Label Text="{Binding Position}"
-                                       FontSize="14" />
-
-                                <Label Text="{Binding Email}"
-                                       FontSize="14" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
         </VerticalStackLayout>
-    </ScrollView>
+
+        <Label Grid.Row="1"
+               Text="Викладачі"
+               FontSize="20"
+               FontAttributes="Bold" />
+
+        <VerticalStackLayout Grid.Row="2" Spacing="8">
+            <Entry Placeholder="Пошук викладача..."
+                   Text="{Binding TeacherSearchText}" />
+
+            <Picker Title="Сортування"
+                    ItemsSource="{Binding TeacherSortOptions}"
+                    SelectedItem="{Binding SelectedTeacherSortOption}" />
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="3" Spacing="12" Wrap="Wrap">
+            <Button Text="Додати викладача"
+                    Command="{Binding AddTeacherCommand}" />
+
+            <Button Text="Редагувати"
+                    Command="{Binding EditTeacherCommand}" />
+
+            <Button Text="Видалити"
+                    Command="{Binding DeleteTeacherCommand}" />
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="4"
+                        ItemsSource="{Binding Teachers}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedTeacher}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12"
+                           Margin="0,6"
+                           CornerRadius="12">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenTeacherCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding FullName}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+
+                            <Label Text="{Binding Position}"
+                                   FontSize="14" />
+
+                            <Label Text="{Binding Email}"
+                                   FontSize="14" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator Grid.Row="5"
+                           IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}" />
+
+    </Grid>
 </ContentPage>

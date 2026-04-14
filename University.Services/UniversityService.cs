@@ -1,3 +1,5 @@
+using University.Models.Data;
+using University.Models.Enums;
 using University.Repositories.Interfaces;
 using University.Services.DTO;
 using University.Services.Interfaces;
@@ -13,32 +15,28 @@ public class UniversityService : IUniversityService
         _repository = repository;
     }
 
-    public IReadOnlyList<DepartmentListItemDto> GetAllDepartments()
+    public async Task<IReadOnlyList<DepartmentListItemDto>> GetAllDepartmentsAsync()
     {
-        return _repository.GetAllDepartments()
-            .Select(d => new DepartmentListItemDto
-            {
-                Id = d.Id,
-                Name = d.Name
-            })
-            .ToList();
+        var departments = await _repository.GetAllDepartmentsAsync();
+
+        return departments
+    .Select(d => new DepartmentListItemDto
+    {
+        Id = d.Id,
+        Name = d.Name,
+        Building = d.Building,
+        Type = d.Type.ToString()
+    })
+    .ToList();
     }
 
-    public DepartmentDetailsDto? GetDepartmentById(int id)
+    public async Task<DepartmentDetailsDto?> GetDepartmentByIdAsync(int id)
     {
-        var department = _repository.GetDepartmentById(id);
+        var department = await _repository.GetDepartmentByIdAsync(id);
         if (department is null)
             return null;
 
-        var teachers = _repository.GetTeachersByDepartmentId(id)
-            .Select(t => new TeacherListItemDto
-            {
-                Id = t.Id,
-                FullName = t.FullName,
-                Position = t.Rank.ToString(),
-                Email = t.Email
-            })
-            .ToList();
+        var teachers = await _repository.GetTeachersByDepartmentIdAsync(id);
 
         return new DepartmentDetailsDto
         {
@@ -47,12 +45,20 @@ public class UniversityService : IUniversityService
             Building = department.Building,
             Type = department.Type.ToString(),
             Teachers = teachers
+                .Select(t => new TeacherListItemDto
+                {
+                    Id = t.Id,
+                    FullName = t.FullName,
+                    Position = t.Rank.ToString(),
+                    Email = t.Email
+                })
+                .ToList()
         };
     }
 
-    public TeacherDetailsDto? GetTeacherById(int id)
+    public async Task<TeacherDetailsDto?> GetTeacherByIdAsync(int id)
     {
-        var teacher = _repository.GetTeacherById(id);
+        var teacher = await _repository.GetTeacherByIdAsync(id);
         if (teacher is null)
             return null;
 
@@ -64,5 +70,39 @@ public class UniversityService : IUniversityService
             Email = teacher.Email,
             ExperienceYears = teacher.ExperienceYears
         };
+    }
+
+    public async Task AddDepartmentAsync(string name, DepartmentType type, string building)
+    {
+        var department = new DepartmentData(0, name, type, building);
+        await _repository.AddDepartmentAsync(department);
+    }
+
+    public async Task UpdateDepartmentAsync(int id, string name, DepartmentType type, string building)
+    {
+        var department = new DepartmentData(id, name, type, building);
+        await _repository.UpdateDepartmentAsync(department);
+    }
+
+    public async Task DeleteDepartmentAsync(int id)
+    {
+        await _repository.DeleteDepartmentAsync(id);
+    }
+
+    public async Task AddTeacherAsync(int departmentId, string fullName, AcademicRank rank, string email, int experienceYears)
+    {
+        var teacher = new TeacherData(0, departmentId, fullName, rank, email, experienceYears);
+        await _repository.AddTeacherAsync(teacher);
+    }
+
+    public async Task UpdateTeacherAsync(int id, int departmentId, string fullName, AcademicRank rank, string email, int experienceYears)
+    {
+        var teacher = new TeacherData(id, departmentId, fullName, rank, email, experienceYears);
+        await _repository.UpdateTeacherAsync(teacher);
+    }
+
+    public async Task DeleteTeacherAsync(int id)
+    {
+        await _repository.DeleteTeacherAsync(id);
     }
 }

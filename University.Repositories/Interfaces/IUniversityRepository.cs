@@ -4,8 +4,16 @@ namespace University.Repositories.Interfaces;
 
 public interface IUniversityRepository
 {
-    IReadOnlyList<DepartmentData> GetAllDepartments();
-    DepartmentData? GetDepartmentById(int id);
-    IReadOnlyList<TeacherData> GetTeachersByDepartmentId(int departmentId);
-    TeacherData? GetTeacherById(int id);
+    Task<IReadOnlyList<DepartmentData>> GetAllDepartmentsAsync();
+    Task<DepartmentData?> GetDepartmentByIdAsync(int id);
+    Task<IReadOnlyList<TeacherData>> GetTeachersByDepartmentIdAsync(int departmentId);
+    Task<TeacherData?> GetTeacherByIdAsync(int id);
+
+    Task AddDepartmentAsync(DepartmentData department);
+    Task UpdateDepartmentAsync(DepartmentData department);
+    Task DeleteDepartmentAsync(int departmentId);
+
+    Task AddTeacherAsync(TeacherData teacher);
+    Task UpdateTeacherAsync(TeacherData teacher);
+    Task DeleteTeacherAsync(int teacherId);
 }

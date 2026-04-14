@@ -2,17 +2,40 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModels="clr-namespace:University.UI.ViewModels"
     x:Class="University.UI.DepartmentsPage"
     Title="Кафедри">
 
-    <VerticalStackLayout Padding="16" Spacing="12">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="16" RowSpacing="12">
 
-        <Label Text="Список кафедр"
+        <Label Grid.Row="0"
+               Text="Список кафедр"
                FontSize="24"
                FontAttributes="Bold" />
 
-        <CollectionView ItemsSource="{Binding Departments}">
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+            <Entry Placeholder="Пошук кафедри..."
+                   Text="{Binding SearchText}" />
+
+            <Picker Title="Сортування"
+                    ItemsSource="{Binding SortOptions}"
+                    SelectedItem="{Binding SelectedSortOption}" />
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="2" Spacing="12" Wrap="Wrap">
+            <Button Text="Додати кафедру"
+                    Command="{Binding AddDepartmentCommand}" />
+
+            <Button Text="Редагувати"
+                    Command="{Binding EditDepartmentCommand}" />
+
+            <Button Text="Видалити обрану"
+                    Command="{Binding DeleteDepartmentCommand}" />
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Departments}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedDepartment}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="12"
@@ -28,13 +51,22 @@
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{Binding Name}"
                                    FontSize="18"
-                                   FontAttributes="Bold"/>
-                        </VerticalStackLayout>
+                                   FontAttributes="Bold" />
 
+                            <Label Text="{Binding Type}"
+                                   FontSize="14" />
+
+                            <Label Text="{Binding Building}"
+                                   FontSize="14" />
+                        </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-    </VerticalStackLayout>
+        <ActivityIndicator Grid.Row="4"
+                           IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}" />
+
+    </Grid>
 </ContentPage>

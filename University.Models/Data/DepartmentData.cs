@@ -4,10 +4,14 @@ namespace University.Models.Data;
 
 public class DepartmentData
 {
-    public int Id { get; }
-    public string Name { get; private set; }
-    public DepartmentType Type { get; private set; }
-    public string Building { get; private set; }
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public DepartmentType Type { get; set; }
+    public string Building { get; set; } = string.Empty;
+
+    public DepartmentData()
+    {
+    }
 
     public DepartmentData(int id, string name, DepartmentType type, string building)
     {
